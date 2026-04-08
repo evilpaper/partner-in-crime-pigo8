@@ -6,7 +6,12 @@ type game struct{}
 
 func (g *game) Init()   {}
 func (g *game) Update() {}
-func (g *game) Draw()   { p8.Cls(1) }
+
+func (g *game) Draw() {
+    p8.Cls(1)
+    p8.Print("hello, world!", 40, 60)
+}
+
 
 func main() {
     p8.InsertGame(&game{})
