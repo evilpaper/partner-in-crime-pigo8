@@ -2,28 +2,23 @@ package main
 
 import p8 "github.com/drpaneas/pigo8"
 
-type game struct{
-    x, y float64
-}
+type game struct{}
 
-func (g *game) Init()   {
-    g.x = 60
-    g.y = 60
-}
-func (g *game) Update() {
-    if p8.Btn(p8.LEFT) { g.x-- }
-    if p8.Btn(p8.RIGHT) { g.x++ }
-    if p8.Btn(p8.UP) { g.y-- }
-    if p8.Btn(p8.DOWN) { g.y++ }
-}
+func (g *game) Init()   {}
+func (g *game) Update() {}
 
 func (g *game) Draw() {
     p8.Cls(0)
-    p8.Rectfill(g.x, g.y, g.x+8, g.y+8, 8) // Red square
+    p8.Print("game boy!", 52, 70, 3)
 }
 
-
 func main() {
+    settings := p8.NewSettings()
+    settings.ScreenWidth = 160
+    settings.ScreenHeight = 144
+    settings.WindowTitle = "Game Boy Style"
+    settings.ScaleFactor = 4
+    
     p8.InsertGame(&game{})
-    p8.Play()
+    p8.PlayGameWith(settings)
 }
