@@ -2,23 +2,42 @@ package main
 
 import p8 "github.com/drpaneas/pigo8"
 
-type game struct{}
+type game struct {
+    stars [][2]int  // x, y pairs
+}
 
-func (g *game) Init()   {}
-func (g *game) Update() {}
+func (g *game) Init() {
+    // Create 50 random stars
+    for i := 0; i < 50; i++ {
+        x := p8.Rnd(128)
+        y := p8.Rnd(128)
+        g.stars = append(g.stars, [2]int{x, y})
+    }
+}
+
+func (g *game) Update() {
+    // Update the stars
+    for _, star := range g.stars {
+        star[1]++
+        if star[1] > 128 {
+            star[1] = 0
+        }
+    }
+}
 
 func (g *game) Draw() {
     p8.Cls(0)
-    p8.Print("game boy!", 52, 70, 3)
+    for _, star := range g.stars {
+        // Random twinkle: white or light gray
+        color := 7
+        if p8.Rnd(10) < 3 {
+            color = 6
+        }
+        p8.Pset(star[0], star[1], color)
+    }
 }
 
 func main() {
-    settings := p8.NewSettings()
-    settings.ScreenWidth = 160
-    settings.ScreenHeight = 144
-    settings.WindowTitle = "Game Boy Style"
-    settings.ScaleFactor = 4
-    
     p8.InsertGame(&game{})
-    p8.PlayGameWith(settings)
+    p8.Play()
 }
