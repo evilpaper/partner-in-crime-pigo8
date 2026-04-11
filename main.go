@@ -1,39 +1,34 @@
 package main
 
 import p8 "github.com/drpaneas/pigo8"
+import "fmt"
 
 type game struct {
-    stars [][2]int  // x, y pairs
+    score int
+    lives int
 }
 
 func (g *game) Init() {
-    // Create 50 random stars
-    for i := 0; i < 50; i++ {
-        x := p8.Rnd(128)
-        y := p8.Rnd(128)
-        g.stars = append(g.stars, [2]int{x, y})
-    }
+    g.score = 0
+    g.lives = 3
 }
-
-func (g *game) Update() {
-    // Update the stars
-    for _, star := range g.stars {
-        star[1]++
-        if star[1] > 128 {
-            star[1] = 0
-        }
-    }
-}
+func (g *game) Update() {}
 
 func (g *game) Draw() {
     p8.Cls(0)
-    for _, star := range g.stars {
-        // Random twinkle: white or light gray
-        color := 7
-        if p8.Rnd(10) < 3 {
-            color = 6
-        }
-        p8.Pset(star[0], star[1], color)
+    
+    // Title
+    p8.Print("SPACE SHOOTER", 30, 5, 7)
+    
+    // Score (right-aligned)
+    scoreText := fmt.Sprintf("%05d", g.score)
+    p8.Print("SCORE:", 85, 5, 6)
+    p8.Print(scoreText, 105, 5, 11)
+    
+    // Lives
+    p8.Print("LIVES:", 5, 5, 6)
+    for i := 0; i < g.lives; i++ {
+        p8.Spr(1, 30+i*10, 3)  // Heart sprites
     }
 }
 
