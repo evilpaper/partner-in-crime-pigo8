@@ -1,0 +1,8 @@
+{
+  "version": "1.0",
+  "description": "Map created with PIGO8 editor",
+  "width": 320,
+  "height": 320,
+  "name": "map",
+  "cells": []
+}
