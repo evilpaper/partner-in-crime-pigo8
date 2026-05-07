@@ -1,35 +1,23 @@
 package main
 
 import p8 "github.com/drpaneas/pigo8"
-import "fmt"
 
-type game struct {
-    score int
-    lives int
-}
+type game struct{}
 
-func (g *game) Init() {
-    g.score = 0
-    g.lives = 3
-}
+func (g *game) Init() {}
+
 func (g *game) Update() {}
 
 func (g *game) Draw() {
-    p8.Cls(0)
+    p8.Cls(1)  // Dark blue background
     
-    // Title
-    p8.Print("SPACE SHOOTER", 30, 5, 7)
+    // Draw sprite normally
+    p8.Spr(5, 40, 60)
     
-    // Score (right-aligned)
-    scoreText := fmt.Sprintf("%05d", g.score)
-    p8.Print("SCORE:", 85, 5, 6)
-    p8.Print(scoreText, 105, 5, 11)
-    
-    // Lives
-    p8.Print("LIVES:", 5, 5, 6)
-    for i := 0; i < g.lives; i++ {
-        p8.Spr(1, 30+i*10, 3)  // Heart sprites
-    }
+    // Draw same sprite with yellow transparent (shows background)
+    p8.Palt(10, true)  // Yellow transparent
+    p8.Spr(5, 80, 60)
+    p8.Palt()  // Reset
 }
 
 func main() {
