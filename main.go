@@ -106,7 +106,29 @@ func (g *Game) resetBall() {
 }
 
 func (g *Game) Draw() {
-  p8.Cls(0)
+    p8.Cls(0)
+    
+    // Center line
+    for y := 0; y < 128; y += 8 {
+        p8.Line(64, float64(y), 64, float64(y+4), 5)
+    }
+    
+    // Paddles
+    p8.Rectfill(g.player.x, g.player.y,
+        g.player.x+g.player.width, g.player.y+g.player.height,
+        g.player.color)
+    p8.Rectfill(g.computer.x, g.computer.y,
+        g.computer.x+g.computer.width, g.computer.y+g.computer.height,
+        g.computer.color)
+    
+    // Ball
+    p8.Rectfill(g.ball.x, g.ball.y,
+        g.ball.x+g.ball.size, g.ball.y+g.ball.size,
+        g.ball.color)
+    
+    // Score
+    p8.Print(g.playerScore, 32, 4, 12)
+    p8.Print(g.computerScore, 92, 4, 8)
 }
 
 func main() {
