@@ -46,6 +46,13 @@ func (g *Game) Init() {
     }
 }
 
+func collides(ball Ball, paddle Paddle) bool {
+    return ball.x+ball.size >= paddle.x &&
+           ball.x <= paddle.x+paddle.width &&
+           ball.y+ball.size >= paddle.y &&
+           ball.y <= paddle.y+paddle.height
+}
+
 func (g *Game) Update() {
 
     // Player movement
@@ -63,6 +70,11 @@ func (g *Game) Update() {
     // Bounce off walls
     if g.ball.y <= 0 || g.ball.y+g.ball.size >= 128 {
         g.ball.dy = -g.ball.dy
+    }
+
+    // Paddle collision
+    if collides(g.ball, g.player) || collides(g.ball, g.computer) {
+        g.ball.dx = -g.ball.dx
     }
 }
 
