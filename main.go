@@ -55,6 +55,15 @@ func (g *Game) Update() {
     if p8.Btn(p8.DOWN) && g.player.y + g.player.height < 128 {
         g.player.y += g.player.speed
     }
+
+    // Move the ball
+    g.ball.x += g.ball.dx
+    g.ball.y += g.ball.dy
+
+    // Bounce off walls
+    if g.ball.y <= 0 || g.ball.y+g.ball.size >= 128 {
+        g.ball.dy = -g.ball.dy
+    }
 }
 
 func (g *Game) Draw() {
