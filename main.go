@@ -2,7 +2,23 @@ package main
 
 import p8 "github.com/drpaneas/pigo8"
 
-type Game struct{}
+type Paddle struct {
+    x, y, width, height, speed float64
+    color int
+}
+
+type Ball stuct {
+    x,  y, size float64
+    dx, dy  float64
+    color int
+}
+
+type Game struct{
+    player Paddle
+    computer Paddle 
+    ball Ball
+    playerScore, computerScore int
+}
 
 func (g *Game) Init() {}
 
