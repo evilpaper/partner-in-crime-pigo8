@@ -46,7 +46,16 @@ func (g *Game) Init() {
     }
 }
 
-func (g *Game) Update() {}
+func (g *Game) Update() {
+
+    // Player movement
+    if p8.Btn(p8.UP) && g.player.y > 0 {
+        g.player.y -= g.player.speed
+    }
+    if p8.Btn(p8.DOWN) && g.player.y + g.player.height < 128 {
+        g.player.y += g.player.speed
+    }
+}
 
 func (g *Game) Draw() {
   p8.Cls(0)
