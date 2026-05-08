@@ -86,6 +86,17 @@ func (g *Game) Update() {
         g.playerScore++
         g.resetBall()
     }
+
+    // Simple AI: follow the ball
+    if g.ball.dx > 0 {
+        mid := g.computer.y + g.computer.height/2
+        if mid < g.ball.y && g.computer.y+g.computer.height < 128 {
+            g.computer.y += g.computer.speed
+        }
+        if mid > g.ball.y && g.computer.y > 0 {
+            g.computer.y -= g.computer.speed
+        }
+    }
 }
 
 func (g *Game) resetBall() {
