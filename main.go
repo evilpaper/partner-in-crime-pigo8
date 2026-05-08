@@ -76,6 +76,22 @@ func (g *Game) Update() {
     if collides(g.ball, g.player) || collides(g.ball, g.computer) {
         g.ball.dx = -g.ball.dx
     }
+
+    // Score when ball exits
+    if g.ball.x < 0 {
+        g.computerScore++
+        g.resetBall()
+    }
+    if g.ball.x > 128 {
+        g.playerScore++
+        g.resetBall()
+    }
+}
+
+func (g *Game) resetBall() {
+    g.ball.x = 62
+    g.ball.y = 62
+    g.ball.dx = -g.ball.dx  // Serve toward last scorer
 }
 
 func (g *Game) Draw() {
