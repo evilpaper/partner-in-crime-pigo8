@@ -75,6 +75,7 @@ func (g *Game) Update() {
     // Paddle collision
     if collides(g.ball, g.player) || collides(g.ball, g.computer) {
         g.ball.dx = -g.ball.dx
+        p8.Music(0)
     }
 
     // Score when ball exits
